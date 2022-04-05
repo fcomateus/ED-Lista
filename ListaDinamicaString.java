@@ -11,8 +11,8 @@ import java.util.Arrays;
  * @author fmfr
  */
 public class ListaDinamicaString{
-  private NoString primeiro;
-  private NoString ultimo;
+  public NoString primeiro;
+  public NoString ultimo;
 
   public ListaDinamicaString() {
     primeiro = null;
