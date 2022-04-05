@@ -1,23 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package lseStrings;
-
 import java.util.Arrays;
-
-/**
- *
- * @author fmfr
- */
 public class ListaDinamicaString{
-  public NoString primeiro;
-  public NoString ultimo;
+    public NoString primeiro;
+    public NoString ultimo;
 
-  public ListaDinamicaString() {
-    primeiro = null;
-    ultimo = null;
-  }
+    public ListaDinamicaString() {
+        primeiro = null;
+        ultimo = null;
+    }
 
 //  public void add_1() {
 //    No aux = primeiro;
@@ -30,48 +19,48 @@ public class ListaDinamicaString{
 
 // 1  ->  2  -> 3 -> 4 -> null
 
-  public void adicionarFinal(String valor) {
-    NoString novo = new NoString(valor);
+    public void adicionarFinal(String valor) {
+        NoString novo = new NoString(valor);
 
-    if (primeiro == null) {
-      primeiro = novo;
-      ultimo = novo;
-    } else {
-      ultimo.proximo = novo;
-      ultimo = novo;
+        if (primeiro == null) {
+            primeiro = novo;
+            ultimo = novo;
+        } else {
+            ultimo.proximo = novo;
+            ultimo = novo;
+        }
+
+        //ultimo.proximo = primeiro; //circularidade
     }
 
-    //ultimo.proximo = primeiro; //circularidade
-  }
+    public void adicionarInicio(String valor) {
+        NoString novo = new NoString(valor);
 
-  public void adicionarInicio(String valor) {
-    NoString novo = new NoString(valor);
-
-    if (primeiro == null) {
-      primeiro = novo;
-      ultimo = novo;
-    } else {
-      novo.proximo = primeiro;
-      primeiro = novo;
-    }
-
-    //ultimo.proximo = primeiro;
-  }
-
-  public void removerInicio() {
-    if (primeiro != null) {
-      if (primeiro == ultimo) {
-        primeiro = null;
-        ultimo = null;
-      } else {
-        NoString aux = primeiro;
-        primeiro = primeiro.proximo;
-        aux.proximo = null;
+        if (primeiro == null) {
+            primeiro = novo;
+            ultimo = novo;
+        } else {
+            novo.proximo = primeiro;
+            primeiro = novo;
+        }
 
         //ultimo.proximo = primeiro;
-      }
     }
-  }
+
+    public void removerInicio() {
+        if (primeiro != null) {
+            if (primeiro == ultimo) {
+                primeiro = null;
+                ultimo = null;
+            } else {
+                NoString aux = primeiro;
+                primeiro = primeiro.proximo;
+                aux.proximo = null;
+
+                //ultimo.proximo = primeiro;
+            }
+        }
+    }
 
     public void removerFinal() {
         if (ultimo != null) {
@@ -93,148 +82,148 @@ public class ListaDinamicaString{
 
     }
 
-  
-  public void removerPosicao(int posicao) {
-    int tam = tamanho();
 
-    if (posicao < 0 || posicao >= tam) {
-      System.out.println("Posicao (" + posicao + ") Invalida!!!");
-      return;
-    }
+    public void removerPosicao(int posicao) {
+        int tam = tamanho();
 
-    if (posicao == (tam - 1)) {
-      removerFinal();
-    } else {
-      if (posicao == 0) {
-        removerInicio();
-      } else {
-        NoString atual = primeiro;
-        for (int i = 0; i < posicao - 1; i++) {
-          atual = atual.proximo;
+        if (posicao < 0 || posicao >= tam) {
+            System.out.println("Posicao (" + posicao + ") Invalida!!!");
+            return;
         }
-        // atual = atual.proximo.proximo;
-        NoString apagar = atual.proximo;
-        atual.proximo = atual.proximo.proximo;
-        apagar.proximo = null;
-      }
-    }
-  }
 
-  public void exibir() {
-      if(primeiro == null){
-          System.out.println("lista vazia!");
-      } else{
-          NoString atual = primeiro;
-
-          while (atual.proximo != null) {
-              System.out.print(atual.valor + " ");
-              atual = atual.proximo;
-          }
-
-          System.out.print(atual.valor + " ");
-
-          System.out.println();
-      }
-
-  }
-
-  public int tamanho() {
-    int cont = 0;
-    NoString atual = primeiro;
-    while (atual != null && atual != ultimo) {
-      cont++;
-      atual = atual.proximo;
+        if (posicao == (tam - 1)) {
+            removerFinal();
+        } else {
+            if (posicao == 0) {
+                removerInicio();
+            } else {
+                NoString atual = primeiro;
+                for (int i = 0; i < posicao - 1; i++) {
+                    atual = atual.proximo;
+                }
+                // atual = atual.proximo.proximo;
+                NoString apagar = atual.proximo;
+                atual.proximo = atual.proximo.proximo;
+                apagar.proximo = null;
+            }
+        }
     }
 
-    if (atual != null) {
-      cont++;
+    public void exibir() {
+        if(primeiro == null){
+            System.out.println("lista vazia!");
+        } else{
+            NoString atual = primeiro;
+
+            while (atual.proximo != null) {
+                System.out.print(atual.valor + " ");
+                atual = atual.proximo;
+            }
+
+            System.out.print(atual.valor + " ");
+
+            System.out.println();
+        }
+
     }
 
-    return cont;
-  }
+    public int tamanho() {
+        int cont = 0;
+        NoString atual = primeiro;
+        while (atual != null && atual != ultimo) {
+            cont++;
+            atual = atual.proximo;
+        }
 
-  public void adicionarPosicao(int pos, String valor) {
-    int tam = tamanho();
-    // posicao invalida...
-    if (pos < 0 || pos > tam) {
-      System.out.println("Posicao Invalida!!!");
-      return;
-    }
-    if (pos == 0) {
-      adicionarInicio(valor);
-    } else if (pos == tamanho()) {
-      adicionarFinal(valor);
-    } else {
-      NoString atual = primeiro;
-      // inserir em poiscoes entre o inicio e o fim
-      for (int i = 0; i < pos - 1; i++) {
-        atual = atual.proximo;
-      }
-      NoString novo = new NoString(valor);
-      novo.proximo = atual.proximo;
-      atual.proximo = novo;
-    }
-  }
+        if (atual != null) {
+            cont++;
+        }
 
-  // Questao 1 - Lista 1 AV2 - semanal
-  // Supondo que nao existe a referencia ultimo
-  public String retornarUltimo() {
-    NoString atual = primeiro;
-    while (atual.proximo != null) {
-      atual = atual.proximo;
+        return cont;
     }
 
-    return atual.valor;
-  }
-
-  public String retornarPenultimo() {
-    NoString atual = primeiro;
-    while (atual.proximo.proximo != null) {
-      atual = atual.proximo;
+    public void adicionarPosicao(int pos, String valor) {
+        int tam = tamanho();
+        // posicao invalida...
+        if (pos < 0 || pos > tam) {
+            System.out.println("Posicao Invalida!!!");
+            return;
+        }
+        if (pos == 0) {
+            adicionarInicio(valor);
+        } else if (pos == tamanho()) {
+            adicionarFinal(valor);
+        } else {
+            NoString atual = primeiro;
+            // inserir em poiscoes entre o inicio e o fim
+            for (int i = 0; i < pos - 1; i++) {
+                atual = atual.proximo;
+            }
+            NoString novo = new NoString(valor);
+            novo.proximo = atual.proximo;
+            atual.proximo = novo;
+        }
     }
 
-    return atual.valor;
-  }
+    // Questao 1 - Lista 1 AV2 - semanal
+    // Supondo que nao existe a referencia ultimo
+    public String retornarUltimo() {
+        NoString atual = primeiro;
+        while (atual.proximo != null) {
+            atual = atual.proximo;
+        }
 
-  public String retornarValorPosicao(int pos) {
-    NoString atual = primeiro;
-    int tamanho = tamanho();
-    if (pos < 0 || pos >= tamanho) {
-      System.out.println("Posicao invalida");
-      return "posição inválida";
-    }
-    for (int i = 0; i < pos; i++) {
-      atual = atual.proximo;
-    }
-    return atual.valor;
-  }
-
-  public NoString retornarItem(int pos) {
-    NoString atual = primeiro;
-
-    for (int i = 0; i < pos; i++) {
-      atual = atual.proximo;
+        return atual.valor;
     }
 
-    return atual;
-  }
-  
+    public String retornarPenultimo() {
+        NoString atual = primeiro;
+        while (atual.proximo.proximo != null) {
+            atual = atual.proximo;
+        }
+
+        return atual.valor;
+    }
+
+    public String retornarValorPosicao(int pos) {
+        NoString atual = primeiro;
+        int tamanho = tamanho();
+        if (pos < 0 || pos >= tamanho) {
+            System.out.println("Posicao invalida");
+            return "posição inválida";
+        }
+        for (int i = 0; i < pos; i++) {
+            atual = atual.proximo;
+        }
+        return atual.valor;
+    }
+
+    public NoString retornarItem(int pos) {
+        NoString atual = primeiro;
+
+        for (int i = 0; i < pos; i++) {
+            atual = atual.proximo;
+        }
+
+        return atual;
+    }
+
     public void alterarPosicao(int pos, String valor) {
-    NoString atual = primeiro;
-    int tamanho = tamanho();
-    if (pos < 0 || pos >= tamanho) {
-      System.out.println("Posicao invalida");
-      
-    }
-    for (int i = 0; i < pos; i++) {
-      atual = atual.proximo;
-    }
-    atual.valor = valor;
-  }
+        NoString atual = primeiro;
+        int tamanho = tamanho();
+        if (pos < 0 || pos >= tamanho) {
+            System.out.println("Posicao invalida");
 
-  public void transformarLSENaoCircularCircular() {
-    ultimo.proximo = primeiro;
-  }
+        }
+        for (int i = 0; i < pos; i++) {
+            atual = atual.proximo;
+        }
+        atual.valor = valor;
+    }
+
+    public void transformarLSENaoCircularCircular() {
+        ultimo.proximo = primeiro;
+    }
 
     public void inverterLista() {
         NoString anterior = null, atual = primeiro, prox = null;
@@ -248,24 +237,24 @@ public class ListaDinamicaString{
         primeiro = anterior;
 
     }
-  
 
-  public boolean jaNaLista(String valor) {
-    int tam = tamanho();
-    NoString atual = primeiro;
 
-    if (primeiro != null) {
-      for (int i = 0; i < tam; i++) {
-        if (atual.valor == valor) {
-          return true;
+    public boolean jaNaLista(String valor) {
+        int tam = tamanho();
+        NoString atual = primeiro;
+
+        if (primeiro != null) {
+            for (int i = 0; i < tam; i++) {
+                if (atual.valor == valor) {
+                    return true;
+                }
+
+                atual = atual.proximo;
+            }
         }
 
-        atual = atual.proximo;
-      }
+        return false;
     }
-
-    return false;
-  }
 
 //  public boolean temRepetido() { //CHECAR
 //    if (primeiro != null) {
@@ -334,7 +323,7 @@ public class ListaDinamicaString{
 //      System.out.println("Nao tem itens repetidos");
 //    }
 //  }
-  
+
     public void removerRepetidos() {
         NoString aux = primeiro, aux2;
         while (aux != null && aux.proximo != null) { // Até o penúltimo
@@ -351,10 +340,10 @@ public class ListaDinamicaString{
     }
 
     public void limpar(){
-      primeiro = null;
-      ultimo = null;
-  }
-    
+        primeiro = null;
+        ultimo = null;
+    }
+
     public void inserirAlfabeticamente(String valor) {
         if (primeiro == null || (valor.compareTo(primeiro.valor) < 0)) {
             adicionarInicio(valor);
@@ -371,7 +360,7 @@ public class ListaDinamicaString{
             adicionarFinal(valor);
         }
     }
-    
+
     public void ordenarAlfabeticamente() {
         String nomes[] = new String[tamanho()];
         for (int i = 0; i < tamanho(); i++) {
@@ -384,8 +373,8 @@ public class ListaDinamicaString{
         }
 
     }
-    
-    //CHECAR
+
+
     public ListaDinamicaString ordenarAlfabeticamente2(ListaDinamicaString list) {
         ListaDinamicaString listaOrdenada = new ListaDinamicaString();
 
@@ -401,17 +390,17 @@ public class ListaDinamicaString{
         return listaOrdenada;
 
     }
-  // exercicio 1 - transforma essa LSE nao circular em circular
-  // public void transformarLSENaoCircularCircular() {
-  // ultimo.proximo = primeiro;
-  // }
+    // exercicio 1 - transforma essa LSE nao circular em circular
+    // public void transformarLSENaoCircularCircular() {
+    // ultimo.proximo = primeiro;
+    // }
 
-  // Lista Tarefas para transformar esse codigo em uma LSE
-  // transformarLSENaoCircularCircular
-  ///// LSE Nao Circular ====> LSE Circular ???
+    // Lista Tarefas para transformar esse codigo em uma LSE
+    // transformarLSENaoCircularCircular
+    ///// LSE Nao Circular ====> LSE Circular ???
 
-  // 1) metodo tamanho: while ( *atual != null *)
-  // 2) retornarUltimo() ? => (while(atual.proximo != null))
-  // 3) retornaPenultimo()? => (atual.proximo != null)
-  // 4)
+    // 1) metodo tamanho: while ( *atual != null *)
+    // 2) retornarUltimo() ? => (while(atual.proximo != null))
+    // 3) retornaPenultimo()? => (atual.proximo != null)
+    // 4)
 }

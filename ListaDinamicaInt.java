@@ -1,9 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package lsemaikol;
-
 import java.util.Arrays;
 
 /**
@@ -11,67 +5,67 @@ import java.util.Arrays;
  * @author fmfr
  */
 public class ListaDinamicaInt {
-  private NoInt primeiro;
-  private NoInt ultimo;
+    public NoInt primeiro;
+    public NoInt ultimo;
 
-  public ListaDinamicaInt() {
-    primeiro = null;
-    ultimo = null;
-  }
-
-  public void add_1() {
-    NoInt aux = primeiro;
-    while (aux != ultimo) {
-      aux.valor++;
-      aux = aux.proximo;
+    public ListaDinamicaInt() {
+        primeiro = null;
+        ultimo = null;
     }
-    if (ultimo != null) ultimo.valor++;
-  }
+
+    public void add_1() {
+        NoInt aux = primeiro;
+        while (aux != ultimo) {
+            aux.valor++;
+            aux = aux.proximo;
+        }
+        if (ultimo != null) ultimo.valor++;
+    }
 
 // 1  ->  2  -> 3 -> 4 -> null
 
-  public void adicionarFinal(int valor) {
-    NoInt novo = new NoInt(valor);
+    public void adicionarFinal(int valor) {
+        NoInt novo = new NoInt(valor);
 
-    if (primeiro == null) {
-      primeiro = novo;
-      ultimo = novo;
-    } else {
-      ultimo.proximo = novo;
-      ultimo = novo;
+        if (primeiro == null) {
+            primeiro = novo;
+            ultimo = novo;
+        } else {
+            ultimo.proximo = novo;
+            ultimo = novo;
+        }
+
+        //ultimo.proximo = primeiro; //circularidade
     }
 
-    //ultimo.proximo = primeiro; //circularidade
-  }
+    public void adicionarInicio(int valor) {
+        NoInt novo = new NoInt(valor);
 
-  public void adicionarInicio(int valor) {
-    NoInt novo = new NoInt(valor);
-
-    if (primeiro == null) {
-      primeiro = novo;
-      ultimo = novo;
-    } else {
-      novo.proximo = primeiro;
-      primeiro = novo;
-    }
-
-    //ultimo.proximo = primeiro;
-  }
-
-  public void removerInicio() {
-    if (primeiro != null) {
-      if (primeiro == ultimo) {
-        primeiro = null;
-        ultimo = null;
-      } else {
-        NoInt aux = primeiro;
-        primeiro = primeiro.proximo;
-        aux.proximo = null;
+        if (primeiro == null) {
+            primeiro = novo;
+            ultimo = novo;
+        } else {
+            novo.proximo = primeiro;
+            primeiro = novo;
+        }
 
         //ultimo.proximo = primeiro;
-      }
     }
-  }
+
+    public void removerInicio() {
+        if (primeiro != null) {
+            if (primeiro == ultimo) {
+                primeiro = null;
+                ultimo = null;
+            } else {
+                NoInt aux = primeiro;
+                primeiro = primeiro.proximo;
+                aux.proximo = null;
+
+                //ultimo.proximo = primeiro;
+            }
+        }
+    }
 
     public void removerFinal() { //CHECAR
         if (ultimo != null) {
@@ -93,148 +87,148 @@ public class ListaDinamicaInt {
 
     }
 
-  
-  public void removerPosicao(int posicao) {
-    int tam = tamanho();
 
-    if (posicao < 0 || posicao >= tam) {
-      System.out.println("Posicao (" + posicao + ") Invalida!!!");
-      return;
-    }
+    public void removerPosicao(int posicao) {
+        int tam = tamanho();
 
-    if (posicao == (tam - 1)) {
-      removerFinal(); 
-    } else {
-      if (posicao == 0) {
-        removerInicio();
-      } else {
-        NoInt atual = primeiro;
-        for (int i = 0; i < posicao - 1; i++) {
-          atual = atual.proximo;
+        if (posicao < 0 || posicao >= tam) {
+            System.out.println("Posicao (" + posicao + ") Invalida!!!");
+            return;
         }
-        // atual = atual.proximo.proximo;
-        NoInt apagar = atual.proximo;
-        atual.proximo = atual.proximo.proximo;
-        apagar.proximo = null;
-      }
-    }
-  }
 
-  public void exibir() {
-      if (primeiro == null) {
-          System.out.println("lista vazia");
-      } else {
-          NoInt atual = primeiro;
-
-          while (atual.proximo != null) {
-              System.out.print(atual.valor + " ");
-              atual = atual.proximo;
-          }
-
-          System.out.print(atual.valor + " ");
-
-          System.out.println();
-      }
-    
-  }
-
-  public int tamanho() {
-    int cont = 0;
-    NoInt atual = primeiro;
-    while (atual != null && atual != ultimo) {
-      cont++;
-      atual = atual.proximo;
+        if (posicao == (tam - 1)) {
+            removerFinal();
+        } else {
+            if (posicao == 0) {
+                removerInicio();
+            } else {
+                NoInt atual = primeiro;
+                for (int i = 0; i < posicao - 1; i++) {
+                    atual = atual.proximo;
+                }
+                // atual = atual.proximo.proximo;
+                NoInt apagar = atual.proximo;
+                atual.proximo = atual.proximo.proximo;
+                apagar.proximo = null;
+            }
+        }
     }
 
-    if (atual != null) {
-      cont++;
+    public void exibir() {
+        if (primeiro == null) {
+            System.out.println("lista vazia");
+        } else {
+            NoInt atual = primeiro;
+
+            while (atual.proximo != null) {
+                System.out.print(atual.valor + " ");
+                atual = atual.proximo;
+            }
+
+            System.out.print(atual.valor + " ");
+
+            System.out.println();
+        }
+
     }
 
-    return cont;
-  }
+    public int tamanho() {
+        int cont = 0;
+        NoInt atual = primeiro;
+        while (atual != null && atual != ultimo) {
+            cont++;
+            atual = atual.proximo;
+        }
 
-  public void adicionarPosicao(int pos, int valor) {
-    int tam = tamanho();
-    // posicao invalida...
-    if (pos < 0 || pos > tam) {
-      System.out.println("Posicao Invalida!!!");
-      return;
-    }
-    if (pos == 0) {
-      adicionarInicio(valor);
-    } else if (pos == tamanho()) {
-      adicionarFinal(valor);
-    } else {
-      NoInt atual = primeiro;
-      // inserir em poiscoes entre o inicio e o fim
-      for (int i = 0; i < pos - 1; i++) {
-        atual = atual.proximo;
-      }
-      NoInt novo = new NoInt(valor);
-      novo.proximo = atual.proximo;
-      atual.proximo = novo;
-    }
-  }
+        if (atual != null) {
+            cont++;
+        }
 
-  // Questao 1 - Lista 1 AV2 - semanal
-  // Supondo que nao existe a referencia ultimo
-  public int retornarUltimo() {
-    NoInt atual = primeiro;
-    while (atual.proximo != null) {
-      atual = atual.proximo;
+        return cont;
     }
 
-    return atual.valor;
-  }
-
-  public int retornarPenultimo() {
-    NoInt atual = primeiro;
-    while (atual.proximo.proximo != null) {
-      atual = atual.proximo;
+    public void adicionarPosicao(int pos, int valor) {
+        int tam = tamanho();
+        // posicao invalida...
+        if (pos < 0 || pos > tam) {
+            System.out.println("Posicao Invalida!!!");
+            return;
+        }
+        if (pos == 0) {
+            adicionarInicio(valor);
+        } else if (pos == tamanho()) {
+            adicionarFinal(valor);
+        } else {
+            NoInt atual = primeiro;
+            // inserir em poiscoes entre o inicio e o fim
+            for (int i = 0; i < pos - 1; i++) {
+                atual = atual.proximo;
+            }
+            NoInt novo = new NoInt(valor);
+            novo.proximo = atual.proximo;
+            atual.proximo = novo;
+        }
     }
 
-    return atual.valor;
-  }
+    // Questao 1 - Lista 1 AV2 - semanal
+    // Supondo que nao existe a referencia ultimo
+    public int retornarUltimo() {
+        NoInt atual = primeiro;
+        while (atual.proximo != null) {
+            atual = atual.proximo;
+        }
 
-  public int retornarValorPosicao(int pos) {
-    NoInt atual = primeiro;
-    int tamanho = tamanho();
-    if (pos < 0 || pos >= tamanho) {
-      System.out.println("Posicao invalida");
-      return -1;
-    }
-    for (int i = 0; i < pos; i++) {
-      atual = atual.proximo;
-    }
-    return atual.valor;
-  }
-
-  public NoInt retornarItem(int pos) {
-    NoInt atual = primeiro;
-
-    for (int i = 0; i < pos; i++) {
-      atual = atual.proximo;
+        return atual.valor;
     }
 
-    return atual;
-  }
-  
+    public int retornarPenultimo() {
+        NoInt atual = primeiro;
+        while (atual.proximo.proximo != null) {
+            atual = atual.proximo;
+        }
+
+        return atual.valor;
+    }
+
+    public int retornarValorPosicao(int pos) {
+        NoInt atual = primeiro;
+        int tamanho = tamanho();
+        if (pos < 0 || pos >= tamanho) {
+            System.out.println("Posicao invalida");
+            return -1;
+        }
+        for (int i = 0; i < pos; i++) {
+            atual = atual.proximo;
+        }
+        return atual.valor;
+    }
+
+    public NoInt retornarItem(int pos) {
+        NoInt atual = primeiro;
+
+        for (int i = 0; i < pos; i++) {
+            atual = atual.proximo;
+        }
+
+        return atual;
+    }
+
     public void alterarPosicao(int pos, int valor) {
-    NoInt atual = primeiro;
-    int tamanho = tamanho();
-    if (pos < 0 || pos >= tamanho) {
-      System.out.println("Posicao invalida");
-      
-    }
-    for (int i = 0; i < pos; i++) {
-      atual = atual.proximo;
-    }
-    atual.valor = valor;
-  }
+        NoInt atual = primeiro;
+        int tamanho = tamanho();
+        if (pos < 0 || pos >= tamanho) {
+            System.out.println("Posicao invalida");
 
-  public void transformarLSENaoCircularCircular() {
-    ultimo.proximo = primeiro;
-  }
+        }
+        for (int i = 0; i < pos; i++) {
+            atual = atual.proximo;
+        }
+        atual.valor = valor;
+    }
+
+    public void transformarLSENaoCircularCircular() {
+        ultimo.proximo = primeiro;
+    }
 
     public void inverterLista() {
         NoInt anterior = null, atual = primeiro, prox = null;
@@ -248,93 +242,93 @@ public class ListaDinamicaInt {
         primeiro = anterior;
 
     }
-  
 
-  public boolean jaNaLista(int valor) {
-    int tam = tamanho();
-    NoInt atual = primeiro;
 
-    if (primeiro != null) {
-      for (int i = 0; i < tam; i++) {
-        if (atual.valor == valor) {
-          return true;
-        }
+    public boolean jaNaLista(int valor) {
+        int tam = tamanho();
+        NoInt atual = primeiro;
 
-        atual = atual.proximo;
-      }
-    }
+        if (primeiro != null) {
+            for (int i = 0; i < tam; i++) {
+                if (atual.valor == valor) {
+                    return true;
+                }
 
-    return false;
-  }
-
-  public boolean temRepetido() { //CHECAR
-    if (primeiro != null) {
-      int tam = tamanho();
-      NoInt atual1 = primeiro;
-      NoInt atual2 = primeiro;
-
-      ListaDinamicaInt repetidos = new ListaDinamicaInt();
-
-      for (int i = 0; i < tam; i++) {
-        atual1 = atual1.proximo;
-
-        for (int j = 0; j < tam; j++) {
-          atual2 = atual2.proximo;
-
-          if (atual1.valor == atual2.valor && !atual1.equals(atual2)) {
-
-            if (!repetidos.jaNaLista(atual1.valor)) {
-              repetidos.adicionarInicio(atual1.valor);
+                atual = atual.proximo;
             }
-
-          }
         }
-      }
 
-      if (repetidos.tamanho() > 0) {
-        return true;
-      } else {
         return false;
-      }
-    } else {
-      return false;
     }
-  }
 
-  public void itensRepetidos() { //CHECAR
-    if (primeiro != null) {
-      int tam = tamanho();
-      NoInt atual1 = primeiro;
-      NoInt atual2 = primeiro;
+    public boolean temRepetido() { //CHECAR
+        if (primeiro != null) {
+            int tam = tamanho();
+            NoInt atual1 = primeiro;
+            NoInt atual2 = primeiro;
 
-      ListaDinamicaInt repetidos = new ListaDinamicaInt();
+            ListaDinamicaInt repetidos = new ListaDinamicaInt();
 
-      for (int i = 0; i < tam; i++) {
-        atual1 = atual1.proximo;
+            for (int i = 0; i < tam; i++) {
+                atual1 = atual1.proximo;
 
-        for (int j = 0; j < tam; j++) {
-          atual2 = atual2.proximo;
+                for (int j = 0; j < tam; j++) {
+                    atual2 = atual2.proximo;
 
-          if (atual1.valor == atual2.valor && !atual1.equals(atual2)) {
+                    if (atual1.valor == atual2.valor && !atual1.equals(atual2)) {
 
-            if (!repetidos.jaNaLista(atual1.valor)) {
-              repetidos.adicionarInicio(atual1.valor);
+                        if (!repetidos.jaNaLista(atual1.valor)) {
+                            repetidos.adicionarInicio(atual1.valor);
+                        }
+
+                    }
+                }
             }
 
-          }
+            if (repetidos.tamanho() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
         }
-      }
-
-      if (repetidos.tamanho() > 0) {
-        repetidos.exibir();
-      } else {
-        System.out.println("Nao tem itens repetidos");
-      }
-    } else {
-      System.out.println("Nao tem itens repetidos");
     }
-  }
-  
+
+    public void itensRepetidos() { //CHECAR
+        if (primeiro != null) {
+            int tam = tamanho();
+            NoInt atual1 = primeiro;
+            NoInt atual2 = primeiro;
+
+            ListaDinamicaInt repetidos = new ListaDinamicaInt();
+
+            for (int i = 0; i < tam; i++) {
+                atual1 = atual1.proximo;
+
+                for (int j = 0; j < tam; j++) {
+                    atual2 = atual2.proximo;
+
+                    if (atual1.valor == atual2.valor && !atual1.equals(atual2)) {
+
+                        if (!repetidos.jaNaLista(atual1.valor)) {
+                            repetidos.adicionarInicio(atual1.valor);
+                        }
+
+                    }
+                }
+            }
+
+            if (repetidos.tamanho() > 0) {
+                repetidos.exibir();
+            } else {
+                System.out.println("Nao tem itens repetidos");
+            }
+        } else {
+            System.out.println("Nao tem itens repetidos");
+        }
+    }
+
     public void limpar() {
         primeiro = null;
         ultimo = null;
@@ -351,10 +345,10 @@ public class ListaDinamicaInt {
             adicionarFinal(nomes[i]);
         }
     }
-        
+
     //CHECAR
-        public void inserirCrescente(int valor) {
-        if (primeiro == null || (valor < 0)) {
+    public void inserirCrescente(int valor) {
+        if (primeiro == null || primeiro.valor > valor) {
             adicionarInicio(valor);
         } else {
             NoInt novoNo = new NoInt(valor), aux = primeiro;
@@ -370,6 +364,24 @@ public class ListaDinamicaInt {
         }
     }
 
+    public ListaDinamicaInt ordenarCrescente2(ListaDinamicaInt list) {
+        ListaDinamicaInt listaOrdenada = new ListaDinamicaInt();
+
+        NoInt atual = list.primeiro;
+
+        while (atual.proximo != null) {
+            listaOrdenada.inserirCrescente(atual.valor);
+            atual = atual.proximo;
+        }
+
+        listaOrdenada.inserirCrescente(atual.valor);
+
+        return listaOrdenada;
+
+    }
+
+
+
     public void removerRepetidos() {
         NoInt aux = primeiro, aux2;
         while (aux != null && aux.proximo != null) { // Até o penúltimo
@@ -384,17 +396,17 @@ public class ListaDinamicaInt {
             aux = aux.proximo;
         }
     }
-  // exercicio 1 - transforma essa LSE nao circular em circular
-  // public void transformarLSENaoCircularCircular() {
-  // ultimo.proximo = primeiro;
-  // }
+    // exercicio 1 - transforma essa LSE nao circular em circular
+    // public void transformarLSENaoCircularCircular() {
+    // ultimo.proximo = primeiro;
+    // }
 
-  // Lista Tarefas para transformar esse codigo em uma LSE
-  // transformarLSENaoCircularCircular
-  ///// LSE Nao Circular ====> LSE Circular ???
+    // Lista Tarefas para transformar esse codigo em uma LSE
+    // transformarLSENaoCircularCircular
+    ///// LSE Nao Circular ====> LSE Circular ???
 
-  // 1) metodo tamanho: while ( *atual != null *)
-  // 2) retornarUltimo() ? => (while(atual.proximo != null))
-  // 3) retornaPenultimo()? => (atual.proximo != null)
-  // 4)
+    // 1) metodo tamanho: while ( *atual != null *)
+    // 2) retornarUltimo() ? => (while(atual.proximo != null))
+    // 3) retornaPenultimo()? => (atual.proximo != null)
+    // 4)
 }
