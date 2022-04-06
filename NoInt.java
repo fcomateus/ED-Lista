@@ -1,3 +1,5 @@
+package lsemaikol;
+
 public class NoInt {
     public int valor;
     public NoInt proximo;

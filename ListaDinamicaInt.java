@@ -1,3 +1,5 @@
+package lsemaikol;
+
 import java.util.Arrays;
 
 /**
@@ -261,92 +263,92 @@ public class ListaDinamicaInt {
         return false;
     }
 
-    public boolean temRepetido() { //CHECAR
-        if (primeiro != null) {
-            int tam = tamanho();
-            NoInt atual1 = primeiro;
-            NoInt atual2 = primeiro;
+//    public boolean temRepetido() { //CHECAR
+//        if (primeiro != null) {
+//            int tam = tamanho();
+//            NoInt atual1 = primeiro;
+//            NoInt atual2 = primeiro;
+//
+//            ListaDinamicaInt repetidos = new ListaDinamicaInt();
+//
+//            for (int i = 0; i < tam; i++) {
+//                atual1 = atual1.proximo;
+//
+//                for (int j = 0; j < tam; j++) {
+//                    atual2 = atual2.proximo;
+//
+//                    if (atual1.valor == atual2.valor && !atual1.equals(atual2)) {
+//
+//                        if (!repetidos.jaNaLista(atual1.valor)) {
+//                            repetidos.adicionarInicio(atual1.valor);
+//                        }
+//
+//                    }
+//                }
+//            }
+//
+//            if (repetidos.tamanho() > 0) {
+//                return true;
+//            } else {
+//                return false;
+//            }
+//        } else {
+//            return false;
+//        }
+//    }
 
-            ListaDinamicaInt repetidos = new ListaDinamicaInt();
-
-            for (int i = 0; i < tam; i++) {
-                atual1 = atual1.proximo;
-
-                for (int j = 0; j < tam; j++) {
-                    atual2 = atual2.proximo;
-
-                    if (atual1.valor == atual2.valor && !atual1.equals(atual2)) {
-
-                        if (!repetidos.jaNaLista(atual1.valor)) {
-                            repetidos.adicionarInicio(atual1.valor);
-                        }
-
-                    }
-                }
-            }
-
-            if (repetidos.tamanho() > 0) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
-
-    public void itensRepetidos() { //CHECAR
-        if (primeiro != null) {
-            int tam = tamanho();
-            NoInt atual1 = primeiro;
-            NoInt atual2 = primeiro;
-
-            ListaDinamicaInt repetidos = new ListaDinamicaInt();
-
-            for (int i = 0; i < tam; i++) {
-                atual1 = atual1.proximo;
-
-                for (int j = 0; j < tam; j++) {
-                    atual2 = atual2.proximo;
-
-                    if (atual1.valor == atual2.valor && !atual1.equals(atual2)) {
-
-                        if (!repetidos.jaNaLista(atual1.valor)) {
-                            repetidos.adicionarInicio(atual1.valor);
-                        }
-
-                    }
-                }
-            }
-
-            if (repetidos.tamanho() > 0) {
-                repetidos.exibir();
-            } else {
-                System.out.println("Nao tem itens repetidos");
-            }
-        } else {
-            System.out.println("Nao tem itens repetidos");
-        }
-    }
+//    public void itensRepetidos() { 
+//        if (primeiro != null) {
+//            int tam = tamanho();
+//            NoInt atual1 = primeiro;
+//            NoInt atual2 = primeiro;
+//
+//            ListaDinamicaInt repetidos = new ListaDinamicaInt();
+//
+//            for (int i = 0; i < tam; i++) {
+//                atual1 = atual1.proximo;
+//
+//                for (int j = 0; j < tam; j++) {
+//                    atual2 = atual2.proximo;
+//
+//                    if (atual1.valor == atual2.valor && !atual1.equals(atual2)) {
+//
+//                        if (!repetidos.jaNaLista(atual1.valor)) {
+//                            repetidos.adicionarInicio(atual1.valor);
+//                        }
+//
+//                    }
+//                }
+//            }
+//
+//            if (repetidos.tamanho() > 0) {
+//                repetidos.exibir();
+//            } else {
+//                System.out.println("Nao tem itens repetidos");
+//            }
+//        } else {
+//            System.out.println("Nao tem itens repetidos");
+//        }
+//    }
 
     public void limpar() {
         primeiro = null;
         ultimo = null;
     }
 
-    public void ordenarCrescente() {
-        int nomes[] = new int[tamanho()];
-        for (int i = 0; i < tamanho(); i++) {
-            nomes[i] = retornarValorPosicao(i);
-        }
-        Arrays.sort(nomes);
-        limpar();
-        for (int i = 0; i < nomes.length; i++) {
-            adicionarFinal(nomes[i]);
-        }
-    }
+//    private void ordenarCrescente() {
+//        int nomes[] = new int[tamanho()];
+//        for (int i = 0; i < tamanho(); i++) {
+//            nomes[i] = retornarValorPosicao(i);
+//        }
+//        Arrays.sort(nomes);
+//        limpar();
+//        for (int i = 0; i < nomes.length; i++) {
+//            adicionarFinal(nomes[i]);
+//        }
+//    }
 
-    //CHECAR
+    
     public void inserirCrescente(int valor) {
         if (primeiro == null || primeiro.valor > valor) {
             adicionarInicio(valor);
@@ -395,6 +397,22 @@ public class ListaDinamicaInt {
             }
             aux = aux.proximo;
         }
+    }
+    
+     public boolean temRepetidos() {
+        NoInt aux = primeiro, aux2;
+        while (aux != null && aux.proximo != null) { // Até o penúltimo
+            aux2 = aux;
+            while (aux2.proximo != null) {
+                if ((aux.valor)==(aux2.proximo.valor)) {
+                    return true;
+                } else {
+                    aux2 = aux2.proximo;
+                }
+            }
+            aux = aux.proximo;
+        }
+        return false;
     }
     // exercicio 1 - transforma essa LSE nao circular em circular
     // public void transformarLSENaoCircularCircular() {

@@ -1,3 +1,5 @@
+package lseStrings;
+
 public class NoString {
     public String valor;
     public NoString proximo;

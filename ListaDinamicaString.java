@@ -1,4 +1,7 @@
+package lseStrings;
+
 import java.util.Arrays;
+
 public class ListaDinamicaString{
     public NoString primeiro;
     public NoString ultimo;
@@ -338,6 +341,22 @@ public class ListaDinamicaString{
             aux = aux.proximo;
         }
     }
+    
+     public boolean temRepetidos() {
+        NoString aux = primeiro, aux2;
+        while (aux != null && aux.proximo != null) { // Até o penúltimo
+            aux2 = aux;
+            while (aux2.proximo != null) {
+                if ((aux.valor).equals(aux2.proximo.valor)) {
+                    return true;
+                } else {
+                    aux2 = aux2.proximo;
+                }
+            }
+            aux = aux.proximo;
+        }
+        return false;
+    }
 
     public void limpar(){
         primeiro = null;
@@ -361,18 +380,18 @@ public class ListaDinamicaString{
         }
     }
 
-    public void ordenarAlfabeticamente() {
-        String nomes[] = new String[tamanho()];
-        for (int i = 0; i < tamanho(); i++) {
-            nomes[i] = retornarValorPosicao(i);
-        }
-        Arrays.sort(nomes);
-        limpar();
-        for (int i = 0; i < nomes.length; i++) {
-            adicionarFinal(nomes[i]);
-        }
-
-    }
+//    private void ordenarAlfabeticamente() {
+//        String nomes[] = new String[tamanho()];
+//        for (int i = 0; i < tamanho(); i++) {
+//            nomes[i] = retornarValorPosicao(i);
+//        }
+//        Arrays.sort(nomes);
+//        limpar();
+//        for (int i = 0; i < nomes.length; i++) {
+//            adicionarFinal(nomes[i]);
+//        }
+//
+//    }
 
 
     public ListaDinamicaString ordenarAlfabeticamente2(ListaDinamicaString list) {
