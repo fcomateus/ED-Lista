@@ -33,6 +33,10 @@ public class FilaDuplaInt{
     public int valorPrimeiro(){
         return primeiro.valor;
     }
+    
+    public int valorUltimo(){
+        return ultimo.valor;
+    }
 
 //  public void add_1() {
 //    No aux = primeiro;
