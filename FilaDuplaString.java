@@ -23,6 +23,10 @@ public class FilaDuplaString{
     public String valorPrimeiro(){
         return primeiro.valor;
     }
+    
+    public String valorUltimo(){
+        return ultimo.valor;
+    }
 
 //  public void add_1() {
 //    No aux = primeiro;
