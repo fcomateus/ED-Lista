@@ -54,7 +54,7 @@ public class FilaDuplaString{
         //ultimo.proximo = primeiro; //circularidade
     }
 
-    private void adicionarInicio(String valor) {
+    public void adicionarInicio(String valor) {
         NoString novo = new NoString(valor);
 
         if (primeiro == null) {
@@ -93,7 +93,7 @@ public class FilaDuplaString{
         }
     }
 
-    private void removerFinal() {
+    public void removerFinal() {
         if (ultimo != null) {
             if (primeiro == ultimo) {
                 primeiro = null;
