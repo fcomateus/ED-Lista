@@ -168,20 +168,38 @@ public class ArvoreBinaria {
 		return cont;
 	}
 
+        No irmaoRetorno;
 	
 	// irmao de um determinado no em uma árvore binária
 	public No irmao(No raiz, final No noIrmao) {
 		No irmao = null;
 		if (raiz != null) {
-			if (raiz.esq == noIrmao) irmao = raiz.dir;
-			if (raiz.dir == noIrmao) irmao = raiz.esq;
+                    System.out.println("No atual: "+ raiz.Dado);
+			if (raiz.esq != null && raiz.esq.Dado.equals(noIrmao.Dado))  {
+                            System.out.println("Comparando com filho da esquerda");
+                                                        
+                            irmao = raiz.dir;
+                            irmaoRetorno = irmao;
+                            System.out.println("No irmao de "+noIrmao.Dado+": "+ irmao.Dado);
+                            
+                            return irmaoRetorno;
+                        }
+			if (raiz.dir != null && raiz.dir.Dado.equals(noIrmao.Dado)){
+                            System.out.println("Comparando com filho da direita");
+
+                            irmao = raiz.esq;
+                            irmaoRetorno = irmao;
+                            System.out.println("No irmao de "+noIrmao.Dado+": "+ irmao.Dado);
+                            
+                            return irmaoRetorno;
+                        }
 			
 			if (irmao == null) {
 				irmao = irmao(raiz.esq, noIrmao);
 				irmao = irmao(raiz.dir, noIrmao);
 			}
 		}
-		return irmao;
+		return irmaoRetorno;
 	}
         
         public No buscar(Object busca){
@@ -562,5 +580,88 @@ public class ArvoreBinaria {
             
             return noRemovido;
         }
+        
+        private void deletarMaisProfundo(No raiz, No delecao){
+            Queue<No> q = new LinkedList<>();
+            q.add(raiz);
+            
+            No temp = null;
+            
+            while(!q.isEmpty()){
+                temp = q.peek();
+                q.remove();
+                
+                if(temp == delecao){
+                    temp = null;
+                    return;
+                }
+                
+                if(temp.dir != null){
+                    if(temp.dir == delecao){
+                        temp.dir = null;
+                        return;
+                    } else {
+                        q.add(temp.dir);
+                    }
+                }
+                
+                if(temp.esq != null){
+                    if(temp.esq == delecao){
+                        temp.esq = null;
+                        return;
+                    } else {
+                        q.add(temp.esq);
+                    }
+                }
+                
+                
+                
+            }
+        }
+        
+        public void deletarNo(No raiz, Object dado){
+            
+            if(raiz == null){
+                return;
+            }
+            
+            if(raiz.esq == null && raiz.dir == null){
+                if(raiz.Dado == dado){
+                    raiz = null;
+                    return;
+                } else {
+                    return;
+                }
+            
+            }
+            
+            Queue<No> q = new LinkedList<>();
+            q.add(raiz);
+            
+            No temp = null, dadoNo = null;
+            
+            while(!q.isEmpty()){
+                temp = q.peek();
+                q.remove();
+                
+                if(temp.Dado == dado){
+                    dadoNo = temp;
+                }
+                
+                if(temp.esq != null){
+                    q.add(temp.esq);
+                }
+                
+                if(temp.dir != null){
+                    q.add(temp.dir);
+                }
+            }
+            
+            if(dadoNo != null){
+                Object x = temp.Dado;
+                deletarMaisProfundo(raiz, temp);
+                dadoNo.Dado = x;
+            }
   
+        }
 }

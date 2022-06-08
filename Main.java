@@ -20,10 +20,10 @@ public class Main {
 //        System.out.println("");
 //        System.out.println("arvore 2:");
 //        t2.PreOrdem(t2.root);
-        System.out.println("Dado Buscado:"+t.buscar('A').Dado);
-        
-        
-        System.out.println(t.irmao(t.root, t.buscar('A')));
+        //System.out.println("Dado Buscado:"+t.buscar('A').Dado);
+        System.out.println();
+        t.deletarNo(t.root, t.buscar('H'));
+        t.PreOrdem(t.root);
         //System.out.println( t.irmao(t.root, t.buscar('A')) );
         
 
